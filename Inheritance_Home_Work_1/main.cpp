@@ -1,0 +1,190 @@
+#include <iostream>
+#include <string>
+
+//#define DEBUG
+class Employee
+{
+protected:
+	std::string rang;
+	std::string last_name;
+	std::string first_name;
+	std::string rate;
+
+public:
+	const std::string& get_rang()const
+	{
+		return rang;
+	}
+	const std::string& get_last_name()const
+	{
+		return last_name;
+	}
+	const std::string& get_first_name()const
+	{
+		return first_name;
+	}
+	const std::string& get_rate()const
+	{
+		return rate;
+	}
+	void set_rang(const std::string& rang)
+	{
+		this->rang = rang;
+	}
+	void set_last_name(const std::string& last_name)
+	{
+		this->last_name = last_name;
+	}
+	void set_first_name(const std::string& first_name)
+	{
+		this->first_name = first_name;
+	}
+	void set_rate(const std::string& rate)
+	{
+		this->rate = rate;
+	}
+
+	Employee(const std::string& rang, const std::string& last_name, const std::string& first_name, const std::string& rate)
+	{
+		set_rang(rang);
+		set_last_name(last_name);
+		set_first_name(first_name);
+		set_rate(rate);
+#ifdef DEBUG
+		std::cout << "EmpConstructor:\t" << this << std::endl;
+#endif // DEBUG
+
+	}
+	~Employee()
+	{
+#ifdef DEBUG
+		std::cout << "EmpDestructor:\t" << this << std::endl;
+#endif // DEBUG
+
+	}
+
+	void print()const
+	{
+		std::cout << rang << " " << last_name << " " << first_name << " " << rate << " ";
+	}
+
+};
+
+class ID_namber :public Employee
+{
+	unsigned int ID;
+
+public:
+	const unsigned int get_ID()const
+	{
+		return ID;
+	}
+	void set_ID(const unsigned  int ID)
+	{
+		this->ID = ID;
+	}
+
+	ID_namber(const unsigned int ID, const std::string& rang, const std::string& last_name, const std::string& first_name,
+		const std::string& rate) :Employee(rang, last_name, first_name, rate)
+	{
+		set_ID(ID);
+#ifdef DEBUG
+		std::cout << "IDConstructor:\t" << this << std::endl;
+#endif // DEBUG
+
+	}
+	~ID_namber()
+	{
+#ifdef DEBUG
+		std::cout << "ID_Destructor:\t" << this << std::endl;
+#endif // DEBUG
+
+	}
+	void print()const
+	{
+		std::cout << "ID " << ID << " ";
+		Employee::print();
+	}
+};
+
+class Report_card :public ID_namber
+{
+	unsigned int work_days;
+	unsigned int permaneted_rate;
+	unsigned int hourly_rate;
+	
+
+public:
+	const unsigned int get_work_days()const
+	{
+		return work_days;
+	}
+	const unsigned int get_permaneted_rate()const
+	{
+		return permaneted_rate;
+	}
+	const unsigned int get_hourly_rate()const
+	{
+		return hourly_rate;
+	}
+void set_work_days(const unsigned int work_days)
+{
+	this->work_days = work_days;
+}
+void set_permaneted_rate(const unsigned int permaneted_rate)
+{
+	this->permaneted_rate = permaneted_rate;
+}
+void set_hourly_rate(const unsigned int hourly_rate)
+{
+	this->hourly_rate = hourly_rate;
+}
+
+
+Report_card(const unsigned int ID, const std::string& rang, const std::string& last_name, const std::string& first_name,
+	const std::string& rate,  const unsigned int work_days, const unsigned int permaneted_rate, const unsigned int hourly_rate)
+	:ID_namber(ID, rang, last_name, first_name, rate)
+{
+	set_work_days(work_days);
+	set_permaneted_rate(permaneted_rate);
+	set_hourly_rate(hourly_rate);
+#ifdef DEBUG
+	std::cout << "Rpc_Constructor:\t" << this << std::endl;
+#endif // DEBUG
+
+}
+~Report_card()
+{
+#ifdef DEBUG
+	std::cout << "Rpc_Destructor:\t" << this << std::endl;
+#endif // DEBUG
+
+}
+float cash()const
+{	
+	if (rate == "Permaneted") return (permaneted_rate / 24) * this->work_days;	
+	else return hourly_rate* work_days * 8;	
+}
+void print()const
+{
+	ID_namber::print();
+	if (rate == "Permaneted") { std::cout << work_days << " days\t" << permaneted_rate << " $/month\t" << cash() << " $" << std::endl; }
+	else { std::cout << work_days << " days\t" << hourly_rate << " $/hour\t" << cash() << " $" << std::endl; }	
+}
+
+};
+
+int main()
+{	
+	Report_card rprt_crd_1(1001, "Chif_of_departament", "Shakal", "Karlos", "Permaneted", 23, 3000, 0);
+	rprt_crd_1.print();
+	std::cout << "\n===========================================================\n";
+	Report_card rprt_crd_2(1002, "Manager_1", "Willis", "Brus", "Hourly", 12, 0, 48);
+	rprt_crd_2.print();
+	std::cout << "\n===========================================================\n";
+	Report_card rprt_crd_3(1003, "Manager_2", "Khary", "Mata", "Permaneted", 18, 2500, 0);
+	rprt_crd_3.print();
+	std::cout << "\n===========================================================\n";
+	Report_card rprt_crd_4(1004, "Spec_1", "Zhirinovsky", "Vovan", "Hourly", 5, 0, 3);
+	rprt_crd_4.print();
+}
