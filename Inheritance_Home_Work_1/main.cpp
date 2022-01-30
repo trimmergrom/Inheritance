@@ -176,8 +176,9 @@ void print()const
 
 int main()
 {	
-	Report_card rprt_crd_1(1001, "Chif_of_departament", "Shakal", "Karlos", "Permaneted", 23, 3000, 0);
+	/*Report_card rprt_crd_1(1001, "Chif_of_departament", "Shakal", "Karlos", "Permaneted", 23, 3000, 0);
 	rprt_crd_1.print();
+	std::cout << rprt_crd_1.cash();
 	std::cout << "\n===========================================================\n";
 	Report_card rprt_crd_2(1002, "Manager_1", "Willis", "Brus", "Hourly", 12, 0, 48);
 	rprt_crd_2.print();
@@ -186,5 +187,22 @@ int main()
 	rprt_crd_3.print();
 	std::cout << "\n===========================================================\n";
 	Report_card rprt_crd_4(1004, "Spec_1", "Zhirinovsky", "Vovan", "Hourly", 5, 0, 3);
-	rprt_crd_4.print();
+	rprt_crd_4.print();*/
+	//Generalisation:
+	Report_card* group[] =
+	{
+		new Report_card(1001, "Chif_of_departament", "Shakal", "Karlos", "Permaneted", 23, 3000, 0),
+		new Report_card(1002, "Manager_1", "Willis", "Brus", "Hourly", 12, 0, 48),
+		new Report_card(1003, "Manager_2", "Khary", "Mata", "Permaneted", 18, 2500, 0),
+		new Report_card(1004, "Spec_1", "Zhirinovsky", "Vovan", "Hourly", 5, 0, 3)
+		
+	};
+
+	//Specialisation:
+	for (int i = 0; i < sizeof(group) / sizeof(Report_card*); i++)
+	{
+		group[i]->print();
+
+		std::cout << "\n----------------------------------\n";
+	}
 }
