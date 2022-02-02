@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
+#include <Windows.h>
 
-//#define DEBUG
+#define DEBUG
 class Employee
 {
 protected:
@@ -53,24 +54,22 @@ public:
 #ifdef DEBUG
 		std::cout << "EmpConstructor:\t" << this << std::endl;
 #endif // DEBUG
-
 	}
+
 	~Employee()
 	{
 #ifdef DEBUG
 		std::cout << "EmpDestructor:\t" << this << std::endl;
 #endif // DEBUG
-
 	}
 
 	void print()const
 	{
 		std::cout << rang << " " << last_name << " " << first_name << " " << rate << " ";
 	}
-
 };
 
-class ID_namber :public Employee
+class ID_number :public Employee
 {
 	unsigned int ID;
 
@@ -84,22 +83,22 @@ public:
 		this->ID = ID;
 	}
 
-	ID_namber(const unsigned int ID, const std::string& rang, const std::string& last_name, const std::string& first_name,
+	ID_number(const unsigned int ID, const std::string& rang, const std::string& last_name, const std::string& first_name,
 		const std::string& rate) :Employee(rang, last_name, first_name, rate)
 	{
 		set_ID(ID);
 #ifdef DEBUG
 		std::cout << "IDConstructor:\t" << this << std::endl;
 #endif // DEBUG
-
 	}
-	~ID_namber()
+	
+	~ID_number()
 	{
 #ifdef DEBUG
 		std::cout << "ID_Destructor:\t" << this << std::endl;
 #endif // DEBUG
-
 	}
+	
 	void print()const
 	{
 		std::cout << "ID " << ID << " ";
@@ -107,7 +106,7 @@ public:
 	}
 };
 
-class Report_card :public ID_namber
+class Report_card :public ID_number
 {
 	unsigned int work_days;
 	unsigned int permaneted_rate;
@@ -127,82 +126,74 @@ public:
 	{
 		return hourly_rate;
 	}
-void set_work_days(const unsigned int work_days)
-{
-	this->work_days = work_days;
-}
-void set_permaneted_rate(const unsigned int permaneted_rate)
-{
-	this->permaneted_rate = permaneted_rate;
-}
-void set_hourly_rate(const unsigned int hourly_rate)
-{
-	this->hourly_rate = hourly_rate;
-}
+	void set_work_days(const unsigned int work_days)
+	{
+		this->work_days = work_days;
+	}
+	void set_permaneted_rate(const unsigned int permaneted_rate)
+	{
+		this->permaneted_rate = permaneted_rate;
+	}
+	void set_hourly_rate(const unsigned int hourly_rate)
+	{
+		this->hourly_rate = hourly_rate;
+	}
 
-
-Report_card(const unsigned int ID, const std::string& rang, const std::string& last_name, const std::string& first_name,
+	Report_card(const unsigned int ID, const std::string& rang, const std::string& last_name, const std::string& first_name,
 	const std::string& rate,  const unsigned int work_days, const unsigned int permaneted_rate, const unsigned int hourly_rate)
-	:ID_namber(ID, rang, last_name, first_name, rate)
-{
-	set_work_days(work_days);
-	set_permaneted_rate(permaneted_rate);
-	set_hourly_rate(hourly_rate);
+	:ID_number(ID, rang, last_name, first_name, rate)
+	{
+		set_work_days(work_days);
+		set_permaneted_rate(permaneted_rate);
+		set_hourly_rate(hourly_rate);
 #ifdef DEBUG
-	std::cout << "Rpc_Constructor:\t" << this << std::endl;
+		std::cout << "Rpc_Constructor:\t" << this << std::endl;
 #endif // DEBUG
+	}
 
-}
-~Report_card()
-{
+	~Report_card()
+	{
 #ifdef DEBUG
-	std::cout << "Rpc_Destructor:\t" << this << std::endl;
+		std::cout << "Rpc_Destructor:\t" << this << std::endl;
 #endif // DEBUG
-
-}
-float cash()const
-{	
-	if (rate == "Permaneted") return (permaneted_rate / 24) * this->work_days;	
-	else return hourly_rate* work_days * 8;	
-}
-void print()const
-{
-	ID_namber::print();
-	if (rate == "Permaneted") { std::cout << work_days << " days\t" << permaneted_rate << " $/month\t" << cash() << " $" << std::endl; }
-	else { std::cout << work_days << " days\t" << hourly_rate << " $/hour\t" << cash() << " $" << std::endl; }	
-}
-
+	}
+	float cash()const
+	{	
+		if (rate == "Permaneted") return (permaneted_rate / 24) * this->work_days;	
+		else return hourly_rate* work_days * 8;	
+	}
+	void print()const
+	{
+		ID_number::print();
+		if (rate == "Permaneted") { std::cout << work_days << " days\t" << permaneted_rate << " $/month\t" << cash() << " $" << std::endl; }
+		else { std::cout << work_days << " days\t" << hourly_rate << " $/hour\t" << cash() << " $" << std::endl; }	
+	}
 };
 
 int main()
-{	
-	/*Report_card rprt_crd_1(1001, "Chif_of_departament", "Shakal", "Karlos", "Permaneted", 23, 3000, 0);
-	rprt_crd_1.print();
-	std::cout << rprt_crd_1.cash();
-	std::cout << "\n===========================================================\n";
-	Report_card rprt_crd_2(1002, "Manager_1", "Willis", "Brus", "Hourly", 12, 0, 48);
-	rprt_crd_2.print();
-	std::cout << "\n===========================================================\n";
-	Report_card rprt_crd_3(1003, "Manager_2", "Khary", "Mata", "Permaneted", 18, 2500, 0);
-	rprt_crd_3.print();
-	std::cout << "\n===========================================================\n";
-	Report_card rprt_crd_4(1004, "Spec_1", "Zhirinovsky", "Vovan", "Hourly", 5, 0, 3);
-	rprt_crd_4.print();*/
-	//Generalisation:
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD coord;
+	SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &coord);
+
 	Report_card* group[] =
 	{
 		new Report_card(1001, "Chif_of_departament", "Shakal", "Karlos", "Permaneted", 23, 3000, 0),
 		new Report_card(1002, "Manager_1", "Willis", "Brus", "Hourly", 12, 0, 48),
 		new Report_card(1003, "Manager_2", "Khary", "Mata", "Permaneted", 18, 2500, 0),
-		new Report_card(1004, "Spec_1", "Zhirinovsky", "Vovan", "Hourly", 5, 0, 3)
-		
+		new Report_card(1004, "Spec_1", "Zhirinovsky", "Vovan", "Hourly", 5, 0, 3)		
 	};
 
-	//Specialisation:
 	for (int i = 0; i < sizeof(group) / sizeof(Report_card*); i++)
 	{
 		group[i]->print();
-
 		std::cout << "\n----------------------------------\n";
 	}
+	
+	float Summ = 0;
+	for (int i = 0; i < sizeof(group) / sizeof(Report_card*); i++)
+	{
+		Summ += group[i]->cash();
+	}
+	std::cout << "Department payroll = " << Summ << " $" << std::endl;
 }
