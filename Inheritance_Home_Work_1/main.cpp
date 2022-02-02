@@ -109,8 +109,8 @@ public:
 class Report_card :public ID_number
 {
 	unsigned int work_days;
-	unsigned int permaneted_rate;
-	unsigned int hourly_rate;
+	float permaneted_rate;
+	float hourly_rate;
 	
 
 public:
@@ -118,11 +118,11 @@ public:
 	{
 		return work_days;
 	}
-	const unsigned int get_permaneted_rate()const
+	const float get_permaneted_rate()const
 	{
 		return permaneted_rate;
 	}
-	const unsigned int get_hourly_rate()const
+	const float get_hourly_rate()const
 	{
 		return hourly_rate;
 	}
@@ -130,17 +130,17 @@ public:
 	{
 		this->work_days = work_days;
 	}
-	void set_permaneted_rate(const unsigned int permaneted_rate)
+	void set_permaneted_rate(const float permaneted_rate)
 	{
 		this->permaneted_rate = permaneted_rate;
 	}
-	void set_hourly_rate(const unsigned int hourly_rate)
+	void set_hourly_rate(const float hourly_rate)
 	{
 		this->hourly_rate = hourly_rate;
 	}
 
 	Report_card(const unsigned int ID, const std::string& rang, const std::string& last_name, const std::string& first_name,
-	const std::string& rate,  const unsigned int work_days, const unsigned int permaneted_rate, const unsigned int hourly_rate)
+	const std::string& rate,  const unsigned int work_days, const float permaneted_rate, const float hourly_rate)
 	:ID_number(ID, rang, last_name, first_name, rate)
 	{
 		set_work_days(work_days);
