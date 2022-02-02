@@ -2,7 +2,7 @@
 #include <string>
 #include <Windows.h>
 
-#define DEBUG
+//#define DEBUG
 class Employee
 {
 protected:
@@ -159,7 +159,7 @@ public:
 	}
 	float cash()const
 	{	
-		if (rate == "Permaneted") return (permaneted_rate / 24) * this->work_days;	
+		if (rate == "Permaneted") return (permaneted_rate / 24) * work_days;	
 		else return hourly_rate* work_days * 8;	
 	}
 	void print()const
@@ -195,5 +195,5 @@ int main()
 	{
 		Summ += group[i]->cash();
 	}
-	std::cout << "Department payroll = " << Summ << " $" << std::endl;
+	std::cout << "Departament payroll = " << Summ << " $" << std::endl;
 }
