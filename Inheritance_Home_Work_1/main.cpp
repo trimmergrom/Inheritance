@@ -2,7 +2,7 @@
 #include <string>
 #include <Windows.h>
 
-//#define DEBUG
+#define DEBUG
 class Employee
 {
 protected:
@@ -63,7 +63,7 @@ public:
 #endif // DEBUG
 	}
 
-	void print()const
+	virtual void print()const
 	{
 		std::cout << rang << " " << last_name << " " << first_name << " " << rate << " ";
 	}
@@ -187,7 +187,7 @@ int main()
 	for (int i = 0; i < sizeof(group) / sizeof(Report_card*); i++)
 	{
 		group[i]->print();
-		std::cout << "\n----------------------------------\n";
+		std::cout << "\n------------------------------------------\n";
 	}
 	
 	float Summ = 0;
@@ -196,4 +196,8 @@ int main()
 		Summ += group[i]->cash();
 	}
 	std::cout << "Departament payroll = " << Summ << " $" << std::endl;
+	for (int i = 0; i < sizeof(group) / sizeof(Report_card*); i++)
+	{
+		delete group[i];
+	}
 }

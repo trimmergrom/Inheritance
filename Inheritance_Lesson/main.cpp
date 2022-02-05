@@ -112,6 +112,10 @@ public:
 		cout << speciality << " " << group << " " << rating << " " << attendance << endl;
 	}
 };
+std::ostream& operator<<(std::ostream & os, const Human & obj)
+{
+	return os << obj.get_last_name();
+}
 
 class Teacher :public Human
 {
