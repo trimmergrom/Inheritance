@@ -11,14 +11,17 @@ class Point
 {
 	double x;
 	double y;
+	
 public:
 	double get_x()const;
 	double get_y()const;
+	
 	void set_x(double x);
 	void set_y(double y);
+	
 
 	//					Constructors:
-	Point();
+	Point();	
 	Point(double x, double y);
 	Point(const Point& other);
 	~Point();
@@ -35,3 +38,4 @@ public:
 };
 Point operator+(const Point& left, const Point& rigth);
 double distance(const Point& A, const Point& B);
+std::ostream& operator<<(std::ostream& os, const Point& obj);

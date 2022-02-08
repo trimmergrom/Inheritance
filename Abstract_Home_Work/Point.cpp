@@ -7,6 +7,7 @@ double Point::get_y()const
 {
 	return y;
 }
+
 void Point::set_x(double x)
 {
 	this->x = x;
@@ -16,34 +17,36 @@ void Point::set_y(double y)
 	this->y = y;
 }
 
+
 //					Constructors:
 Point::Point()
 {
 	x = y = 0;
-	cout << "DefaultConstructor:\t" << this << endl;
+	cout << "Point_DefaultConstructor:\t" << this << endl;
 }
+
 Point::Point(double x, double y)
 {
 	this->x = x;
 	this->y = y;
-	cout << "Constructor:\t" << this << endl;
+	cout << "Point_Constructor:\t" << this << endl;
 }
 Point::Point(const Point& other)
 {
 	this->x = other.x;
 	this->y = other.y;
-	cout << "Copyconstructor: " << this << endl;
+	cout << "Point_Copyconstructor: " << this << endl;
 }
 Point::~Point()
 {
-	cout << "Destructor:\t" << this << endl;
+	cout << "Point_Destructor:\t" << this << endl;
 }
 //       Operators:
 Point& Point::operator=(const Point& other)
 {
 	this->x = other.x;
 	this->y = other.y;
-	cout << "CopyAssignment:\t" << this << endl;
+	cout << "Point_CopyAssignment:\t" << this << endl;
 	return *this;
 }
 Point& Point::operator+=(const Point& other)
@@ -98,4 +101,10 @@ double distance(const Point& A, const Point& B)
 	double x_distance = A.get_x() - B.get_x();
 	double y_distance = A.get_y() - B.get_y();
 	return sqrt(pow(x_distance, 2) + pow(y_distance, 2));
+}
+std::ostream& operator<<(std::ostream& os, const Point& obj)
+{
+	cout << "X = " << obj.get_x();
+	cout << " Y = " << obj.get_y();
+	return os;
 }
