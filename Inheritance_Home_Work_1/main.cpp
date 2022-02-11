@@ -56,7 +56,7 @@ public:
 #endif // DEBUG
 	}
 
-	~Employee()
+	virtual ~Employee()
 	{
 #ifdef DEBUG
 		std::cout << "EmpDestructor:\t" << this << std::endl;
@@ -183,10 +183,11 @@ int main()
 		new Report_card(1003, "Manager_2", "Khary", "Mata", "Permaneted", 18, 2500, 0),
 		new Report_card(1004, "Spec_1", "Zhirinovsky", "Vovan", "Hourly", 5, 0, 3)		
 	};
-
+	std::cout << "\n------------------------------------------\n";
 	for (int i = 0; i < sizeof(group) / sizeof(Report_card*); i++)
 	{
-		group[i]->print();
+		//group[i]->print();
+		std::cout << group[i] << std::endl;
 		std::cout << "\n------------------------------------------\n";
 	}
 	

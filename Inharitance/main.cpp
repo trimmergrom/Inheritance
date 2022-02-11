@@ -41,11 +41,11 @@ public:
 		set_age(age);
 		std::cout << "HConstructor:\t" << this << std::endl;
 	}
-	~Human()
+	virtual ~Human()
 	{
 		std::cout << "HDestructor:\t" << this << std::endl;
 	}
-	void print()const
+	virtual void print()const
 	{
 		std::cout << last_name << " " << first_name << " " << age << " years\n";
 	}
@@ -197,5 +197,6 @@ int main()
 	Graduate graduate("Scharder", "Hank", 40, "Chemister", "WW_121", 95, 55, "How to catch Heisenberg");
 	graduate.print();
 #endif // INHERITANCE_CHECK
+	
 
 }
