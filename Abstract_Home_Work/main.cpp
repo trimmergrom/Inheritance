@@ -71,10 +71,15 @@ int main()
 	}
 	std::cout << "The length is: " << pt.size() << '\n';
 	
-	for (int alfa = 0, i = 0; alfa < 360, i < 36; alfa += 10, i++)
+	/*for (int alfa = 0, i = 0; alfa < 360, i < 36; alfa += 10, i++)
 	{
 		pt.at(i) =   Point(circle.get_radius() * cos(alfa * 3.14 / 180), circle.get_radius() * sin(alfa * 3.14 / 180));
+	}*/
+	for (int i = 0; i < 36; i++)
+	{
+		pt.at(i) =   Point(circle.get_radius() * cos((i*10) * 3.14 / 180), circle.get_radius() * sin((i*10) * 3.14 / 180));
 	}
+
 	for (int i = 0; i < 36; i++)
 	{
 		std::cout << "Point " << i << "  " << pt.at(i) << std::endl;
